@@ -24,7 +24,7 @@ def del_outdated_ttl():
         splitted = line.split(',')
         # if it is a dynamic URL then chack TTL
         if len(splitted) == 4:
-            if splitted[3].strip('\n').isnumeric():
+            if splitted[3].strip('\n').replace('.', '', 1).isdigit():
                 ttl = float(splitted[3].strip('\n'))
                 # if ttl has not passed yet, write the same line
                 if this_time < ttl:
@@ -74,7 +74,6 @@ while True:
             s2.sendto(data, (father_ip, father_port))
             data, addr1 = s2.recvfrom(1024)
             line = data.decode()
-            print(line)
             add_line_to_file(line)
             line = line.split(',')[1]
         s2.close()

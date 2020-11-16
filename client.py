@@ -10,6 +10,6 @@ url = input()
 while(True):
     s.sendto(url.encode(), (father_ip, father_port))
     data, addr = s.recvfrom(1024)
-    print(str(data.decode()).strip("\n"), addr)
+    print(str(data.decode()))
     url = input()
 s.close()
