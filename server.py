@@ -74,8 +74,11 @@ while True:
             s2.sendto(data, (father_ip, father_port))
             data, addr1 = s2.recvfrom(1024)
             line = data.decode()
-            add_line_to_file(line)
-            line = line.split(',')[1]
+            if line != "could not find URL":
+                add_line_to_file(line)
+                line = line.split(',')[1]
+        else:
+            line = "could not find URL"
         s2.close()
     else:
         if father_ip != -1 and father_port != -1:
