@@ -54,9 +54,8 @@ def add_line_to_file(line):
     if line.split(",")[2].strip('\n').isnumeric():
         ttl = float(line.split(",")[2].strip('\n'))
         del_time = time.time() + ttl
-        line = line.strip('\n') + "," + str(del_time)
+        line = line.strip('\n') + "," + str(del_time)+"\n"
         # append new line at
-        #f.write('\n')
         f.write(line)
     f.close()
 
@@ -73,9 +72,14 @@ while True:
         s2 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         if father_ip != -1 and father_port != -1:
             s2.sendto(data, (father_ip, father_port))
-            data, addr = s2.recvfrom(1024)
+            data, addr1 = s2.recvfrom(1024)
             line = data.decode()
+            print(line)
             add_line_to_file(line)
+            line = line.split(',')[1]
         s2.close()
-    print(line.strip("\n"), addr)
+    else:
+        if father_ip != -1 and father_port != -1:
+            line = line.split(',')[1]
+
     s.sendto(str.encode(line), addr)
