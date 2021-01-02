@@ -1,2 +1,0 @@
-www.facebook.com,1.2.3.4,30
-www.gmail.com,1.2.3.5,30
